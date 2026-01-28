@@ -1,10 +1,9 @@
 #include <iostream>
 using namespace std;
 
-
 class Account
 {
-protected:
+private:
     int accNo;
     float balance;
 
@@ -22,11 +21,17 @@ public:
         cout << "Account Number: " << accNo << endl;
         cout << "Balance: " << balance << endl;
     }
-};
 
+protected:
+    float getBalance()
+    {
+        return balance;
+    }
+};
 
 class SavingsAccount : public Account
 {
+private:
     float interestRate;
 
 public:
@@ -35,13 +40,14 @@ public:
         cout << "Enter Interest Rate (%): ";
         cin >> interestRate;
 
-        float interest = balance * interestRate / 100;
+        float interest = getBalance() * interestRate / 100;
         cout << "Interest Earned: " << interest << endl;
     }
 };
 
 class CurrentAccount : public Account
 {
+private:
     float overdraftLimit;
 
 public:
@@ -50,8 +56,8 @@ public:
         cout << "Enter Overdraft Limit: ";
         cin >> overdraftLimit;
 
-        cout << "Total Available Balance: " 
-             << balance + overdraftLimit << endl;
+        cout << "Total Available Balance: "
+             << getBalance() + overdraftLimit << endl;
     }
 };
 
